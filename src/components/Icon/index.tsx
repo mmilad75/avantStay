@@ -13,17 +13,17 @@ interface Props {
 }
 
 const Icon: React.FC<Props> = ({name, size = 24, color = 'black'}) => {
-	const [fontsLoaded] = useFonts({
-		ASIcon: require('./asicon.ttf'),
-	});
+  const [fontsLoaded] = useFonts({
+    ASIcon: require('./asicon.ttf'),
+  });
 
-	if (!fontsLoaded) {
-		return <AppLoading />;
-	}
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
 
-	return (
-		<IconComponent name={name} size={size} color={color} />
-	);
+  return (
+    <IconComponent name={name} size={size} color={color} />
+  );
 };
 
 export default Icon;
