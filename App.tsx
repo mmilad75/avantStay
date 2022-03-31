@@ -1,22 +1,29 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
+import {createBottomTabNavigator, BottomTabNavigationProp} from '@react-navigation/bottom-tabs';
+import Explore from './src/navigators/Explore';
 
-export type MainStackParamsList = {};
+export type BottomTabParamsList = {
+	'explore': undefined;
+	'booking': undefined;
+	'profile': undefined;
+	'support': undefined
+}
 
-export type mainStackNavigationType = StackNavigationProp<MainStackParamsList>;
+export type bottomTabNavigationType = BottomTabNavigationProp<BottomTabParamsList>;
 
-const MainStack = createStackNavigator<MainStackParamsList>();
+const BottomTab = createBottomTabNavigator<BottomTabParamsList>();
 
 const Main = () => (
-  <MainStack.Navigator screenOptions={{headerShown: false}}>
-  </MainStack.Navigator>
+  <BottomTab.Navigator screenOptions={{headerShown: false}}>
+    <BottomTab.Screen name="explore" component={Explore} />
+  </BottomTab.Navigator>
 );
 
-const Index: React.FC = () => (
+const App: React.FC = () => (
   <NavigationContainer>
     <Main />
   </NavigationContainer>
 );
 
-export default Index;
+export default App;

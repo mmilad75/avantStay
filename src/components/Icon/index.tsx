@@ -3,6 +3,7 @@ import AppLoading from 'expo-app-loading';
 import {useFonts} from 'expo-font';
 import {createIconSetFromFontello} from '@expo/vector-icons';
 import fontelloConfig from './config.json';
+import colors from '../../helpers/colors';
 
 const IconComponent = createIconSetFromFontello(fontelloConfig, 'ASIcon', 'asicon.ttf');
 
@@ -12,7 +13,7 @@ interface Props {
 	color?: string
 }
 
-const Icon: React.FC<Props> = ({name, size = 24, color = 'black'}) => {
+const Icon: React.FC<Props> = ({name, size = 24, color = colors.primary}) => {
   const [fontsLoaded] = useFonts({
     ASIcon: require('./asicon.ttf'),
   });
