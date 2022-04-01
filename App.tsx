@@ -49,7 +49,7 @@ const Main = () => (
       tabBarIcon: props => handleTabBarIcon(route.name, props),
       tabBarLabel: props => handleTabBarLabel(route.name, props),
       tabBarStyle: globalStyles.tabBarContainer,
-
+      tabBarItemStyle: globalStyles.tabBarItemContainer,
     })}>
     <BottomTab.Screen name="explore" component={Explore} />
     <BottomTab.Screen name="booking" component={Booking} />

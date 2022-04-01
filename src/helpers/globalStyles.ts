@@ -9,7 +9,8 @@ interface Styles {
 	bottomTabIcon: TextStyle,
 	bottomTabLabel: TextStyle,
 	bottomTabActive: TextStyle,
-  tabBarContainer: ViewStyle
+  tabBarContainer: ViewStyle,
+  tabBarItemContainer: ViewStyle
 }
 
 const globalStyles = StyleSheet.create<Styles>({
@@ -36,9 +37,15 @@ const globalStyles = StyleSheet.create<Styles>({
     color: colors.gray,
     fontSize: scaleW(14),
     textTransform: 'capitalize',
+    textAlign: 'center',
   },
   tabBarContainer: {
     borderTopWidth: 0,
+    height: scaleW(90),
+  },
+  tabBarItemContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
