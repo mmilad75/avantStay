@@ -1,22 +1,30 @@
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {scaleW} from './device';
+import {defaultSafeAreaInsetsBottom, defaultSafeAreaInsetsTop, scaleW} from './device';
 import colors from './colors';
 
 interface Styles {
 	container: ViewStyle,
+  safeContainer: ViewStyle,
 	centeredContainer: ViewStyle,
 	screenContainer: ViewStyle,
 	bottomTabIcon: TextStyle,
 	bottomTabLabel: TextStyle,
 	bottomTabActive: TextStyle,
   tabBarContainer: ViewStyle,
-  tabBarItemContainer: ViewStyle
+  tabBarItemContainer: ViewStyle,
+  contentContainer: ViewStyle
 }
 
 const globalStyles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+  },
+  safeContainer: {
+    flex: 1,
+    backgroundColor: colors.white,
+    paddingTop: defaultSafeAreaInsetsTop,
+    paddingBottom: defaultSafeAreaInsetsBottom,
   },
   centeredContainer: {
     flex: 1,
@@ -41,11 +49,14 @@ const globalStyles = StyleSheet.create<Styles>({
   },
   tabBarContainer: {
     borderTopWidth: 0,
-    height: scaleW(90),
+    height: scaleW(75),
   },
   tabBarItemContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  contentContainer: {
+    padding: scaleW(20),
   },
 });
 

@@ -7,6 +7,7 @@ import Button from './Button';
 import CacheImage from './CacheImage';
 import Image from './Image';
 import ImageBackground from './ImageBackground';
+import Header from './Header';
 
 export {
   Text,
@@ -18,4 +19,5 @@ export {
   CacheImage,
   Image,
   ImageBackground,
+  Header,
 };
