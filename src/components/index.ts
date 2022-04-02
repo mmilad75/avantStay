@@ -8,6 +8,7 @@ import CacheImage from './CacheImage';
 import Image from './Image';
 import ImageBackground from './ImageBackground';
 import Header from './Header';
+import SearchInput from './SearchInput';
 
 export {
   Text,
@@ -20,4 +21,5 @@ export {
   Image,
   ImageBackground,
   Header,
+  SearchInput,
 };

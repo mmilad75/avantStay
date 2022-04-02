@@ -1,6 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import React from 'react';
-import {View, Text, Header} from '../../components';
+import React, {useState} from 'react';
+import {View, Text, Header, SearchInput} from '../../components';
 import globalStyles from '../../helpers/globalStyles';
 import {ExploreStackParamsList} from '../../navigators/Explore';
 
@@ -10,13 +10,17 @@ interface Props {
   navigation: DestinationScreenNavigationType
 }
 
-const Destination:React.FC<Props> = ({navigation}) => (
-  <View style={globalStyles.safeContainer}>
-    <Header navigation={navigation} title="Where" rightText="Clear All (1)" />
-    <View style={globalStyles.contentContainer}>
-      <Text> destination</Text>
+const Destination:React.FC<Props> = ({navigation}) => {
+  const [a, setA] = useState<string>('');
+  return (
+    <View style={globalStyles.safeContainer}>
+      <Header navigation={navigation} title="Where" rightText="Clear All (1)" />
+      <View style={globalStyles.contentContainer}>
+        <SearchInput placeholder="Search by destiation name" value={a} setValue={setA} />
+        <Text> destination</Text>
+      </View>
     </View>
-  </View>
-);
+  );
+};
 
 export default Destination;

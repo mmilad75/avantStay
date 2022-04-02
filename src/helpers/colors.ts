@@ -6,8 +6,10 @@ export default {
   pink: 'rgba(239, 84, 177, 1)',
   primary: 'rgba(2, 43, 84, 1)',
   primary15: 'rgba(2, 43, 84, .15)',
-  primary30: 'rgba(2, 43, 84, .30)',
+  primary30: 'rgba(2, 43, 84, .3)',
+  primary40: 'rgba(2, 43, 84, .4)',
   primaryDark: 'rgba(1, 27, 53, 1)',
+  primaryExtraLight: 'rgba(232, 239, 245, 1)',
   greenBlue: 'rgba(83, 195, 208, 1)',
   greenBlue2: 'rgba(52, 174, 188, 1)',
 };
