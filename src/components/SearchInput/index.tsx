@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-import React from 'react';
+import React, {useState} from 'react';
 import {TextInput} from 'react-native';
 import {Button, Icon, View} from '../';
 import colors from '../../helpers/colors';
@@ -19,6 +19,7 @@ interface Props {
 }
 
 const SearchInput: React.FC<Props> = ({setValue, value, placeholder}) => {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [fontsLoaded] = useFonts({
     SourceSansPro_400Regular,
     SourceSansPro_600SemiBold,
@@ -29,12 +30,12 @@ const SearchInput: React.FC<Props> = ({setValue, value, placeholder}) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isFocused && styles.focusedContainer]}>
       <View style={styles.iconContainer}>
         <Icon name="search" size={26} color={colors.primary40} />
       </View>
       <View style={styles.inputContainer}>
-        <TextInput style={[styles.inputText, {fontFamily: 'SourceSansPro_400Regular'}, value?.length > 0 && styles.inputTextFocused]} placeholder={placeholder} value={value} onChangeText={setValue} />
+        <TextInput onFocus={() => setIsFocused(true)} onBlur={() => setIsFocused(false)} style={[styles.inputText, {fontFamily: 'SourceSansPro_400Regular'}, value?.length > 0 && styles.inputTextFocused]} placeholder={placeholder} value={value} onChangeText={setValue} />
       </View>
       {value?.length > 0 && (
         <Button style={styles.buttonContainer} onPress={() => setValue('')}>

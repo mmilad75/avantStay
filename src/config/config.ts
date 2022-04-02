@@ -1,2 +1,8 @@
-export const BASE_URL = 'https://api.nytimes.com/svc/books/v3/';
-export const API_KEY = '2QBLqpTA3t0klOfAHXeeGc7VIYQQRMNg';
+import {ApolloClient, InMemoryCache} from '@apollo/client';
+
+export const BASE_URL = 'https://fake-api.avantstay.dev/graphql';
+
+export const apolloClient = new ApolloClient({
+  uri: BASE_URL,
+  cache: new InMemoryCache(),
+});

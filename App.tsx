@@ -8,6 +8,8 @@ import colors from './src/helpers/colors';
 import Booking from './src/screens/tabs/Booking';
 import Profile from './src/screens/tabs/Profile';
 import Support from './src/screens/tabs/Support';
+import {ApolloProvider} from '@apollo/client';
+import {apolloClient} from './src/config/config';
 
 export type BottomTabParamsList = {
 	'explore': undefined;
@@ -59,9 +61,11 @@ const Main = () => (
 );
 
 const App: React.FC = () => (
-  <NavigationContainer>
-    <Main />
-  </NavigationContainer>
+  <ApolloProvider client={apolloClient}>
+    <NavigationContainer>
+      <Main />
+    </NavigationContainer>
+  </ApolloProvider>
 );
 
 export default App;

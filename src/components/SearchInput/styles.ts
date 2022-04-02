@@ -4,6 +4,7 @@ import {scaleW} from '../../helpers/device';
 
 interface Styles {
   container: ViewStyle,
+  focusedContainer: ViewStyle,
   iconContainer: ViewStyle,
   inputContainer: ViewStyle,
   buttonContainer: ViewStyle,
@@ -19,6 +20,10 @@ export default StyleSheet.create<Styles>({
     borderColor: colors.primaryExtraLight,
     paddingVertical: scaleW(12),
     marginBottom: scaleW(10),
+  },
+  focusedContainer: {
+    borderColor: colors.greenBlue3,
+    borderBottomWidth: scaleW(2),
   },
   iconContainer: {
     marginRight: scaleW(10),

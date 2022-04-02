@@ -8,8 +8,10 @@ export default {
   primary15: 'rgba(2, 43, 84, .15)',
   primary30: 'rgba(2, 43, 84, .3)',
   primary40: 'rgba(2, 43, 84, .4)',
+  primary70: 'rgba(2, 43, 84, .7)',
   primaryDark: 'rgba(1, 27, 53, 1)',
   primaryExtraLight: 'rgba(232, 239, 245, 1)',
   greenBlue: 'rgba(83, 195, 208, 1)',
   greenBlue2: 'rgba(52, 174, 188, 1)',
+  greenBlue3: 'rgba(163, 223, 230, 1)',
 };
