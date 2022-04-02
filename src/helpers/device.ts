@@ -1,26 +1,26 @@
 import {Dimensions, Platform} from 'react-native';
 import {initialWindowMetrics} from 'react-native-safe-area-context';
 
-const {width} = Dimensions.get('window');
-const {height} = Dimensions.get('window');
-const layoutWidth = width < 480
+const {width}: {width: number} = Dimensions.get('window');
+const {height}: {height: number} = Dimensions.get('window');
+const layoutWidth: number = width < 480
   ? 375 : width < 720
     ? 480 : width < 960
       ? 720 : width < 1280
         ? 960 : width * 0.8;
 
-const scaleW = (size: number) => (width / layoutWidth) * size;
+const scaleW = (size: number): number => (width / layoutWidth) * size;
 
-const isIOS = Platform.OS === 'ios';
+const isIOS: boolean = Platform.OS === 'ios';
 
 const defaultSafeAreaInsetsTop = initialWindowMetrics?.insets.top;
 const defaultSafeAreaInsetsBottom = initialWindowMetrics?.insets.bottom;
-const safeAreaInsetsTop
+const safeAreaInsetsTop: number
   = isIOS
-    ? initialWindowMetrics?.insets.top
+    ? initialWindowMetrics?.insets.top ? initialWindowMetrics.insets.top : 0
     : 0;
-const safeAreaInsetsBottom = isIOS
-  ? initialWindowMetrics?.insets.bottom
+const safeAreaInsetsBottom: number = isIOS
+  ? initialWindowMetrics?.insets.bottom ? initialWindowMetrics.insets.bottom : 0
   : 0;
 
 export {

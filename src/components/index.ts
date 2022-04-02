@@ -5,6 +5,8 @@ import FlatList from './FlatList';
 import Icon from './Icon';
 import Button from './Button';
 import CacheImage from './CacheImage';
+import Image from './Image';
+import ImageBackground from './ImageBackground';
 
 export {
   Text,
@@ -14,4 +16,6 @@ export {
   Icon,
   Button,
   CacheImage,
+  Image,
+  ImageBackground,
 };
