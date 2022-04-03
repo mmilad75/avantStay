@@ -23,6 +23,8 @@ const safeAreaInsetsBottom: number = isIOS
   ? initialWindowMetrics?.insets.bottom ? initialWindowMetrics.insets.bottom : 0
   : 0;
 
+const TABBAR_HEIGHT: number = scaleW(80);
+
 export {
   width,
   height,
@@ -31,4 +33,5 @@ export {
   defaultSafeAreaInsetsTop,
   safeAreaInsetsBottom,
   safeAreaInsetsTop,
+  TABBAR_HEIGHT,
 };

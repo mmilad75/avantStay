@@ -10,6 +10,7 @@ import ImageBackground from './ImageBackground';
 import Header from './Header';
 import SearchInput from './SearchInput';
 import RegionListItem from './RegionListItem';
+import StateListItem from './StateListItem';
 
 export {
   Text,
@@ -24,4 +25,5 @@ export {
   Header,
   SearchInput,
   RegionListItem,
+  StateListItem,
 };

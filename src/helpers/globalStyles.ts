@@ -1,5 +1,5 @@
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {defaultSafeAreaInsetsBottom, defaultSafeAreaInsetsTop, scaleW} from './device';
+import {defaultSafeAreaInsetsTop, TABBAR_HEIGHT, scaleW} from './device';
 import colors from './colors';
 
 interface Styles {
@@ -24,7 +24,7 @@ const globalStyles = StyleSheet.create<Styles>({
     flex: 1,
     backgroundColor: colors.white,
     paddingTop: defaultSafeAreaInsetsTop,
-    paddingBottom: defaultSafeAreaInsetsBottom,
+    paddingBottom: TABBAR_HEIGHT,
   },
   centeredContainer: {
     flex: 1,
@@ -49,7 +49,7 @@ const globalStyles = StyleSheet.create<Styles>({
   },
   tabBarContainer: {
     borderTopWidth: 0,
-    height: scaleW(75),
+    height: TABBAR_HEIGHT,
   },
   tabBarItemContainer: {
     justifyContent: 'center',

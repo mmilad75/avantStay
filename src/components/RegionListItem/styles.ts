@@ -13,6 +13,7 @@ export default StyleSheet.create<Styles>({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: scaleW(14),
   },
   checkboxContainer: {
     width: scaleW(26),

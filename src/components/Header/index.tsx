@@ -7,7 +7,7 @@ import styles from './styles';
 interface Props {
   navigation: DestinationScreenNavigationType,
   title?: string,
-  rightText?: string,
+  rightText?: string | undefined,
   onRightPress?: () => void
 }
 

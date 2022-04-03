@@ -19,7 +19,7 @@ export default StyleSheet.create<Styles>({
     borderBottomWidth: scaleW(1),
     borderColor: colors.primaryExtraLight,
     paddingVertical: scaleW(12),
-    marginBottom: scaleW(10),
+    marginBottom: scaleW(20),
   },
   focusedContainer: {
     borderColor: colors.greenBlue3,
