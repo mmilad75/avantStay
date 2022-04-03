@@ -3,13 +3,13 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {FlatList} from 'react-native';
 import {View, Header, SearchInput, RegionListItem, StateListItem} from '../../components';
 import globalStyles from '../../helpers/globalStyles';
-import {ExploreStackParamsList} from '../../navigators/Explore';
+import {StackParamsList} from '../../navigators/Stack';
 import {useQuery} from '@apollo/client';
 import {GET_REGIONS} from '../../qraphql/queries';
 import {Region, Regions, SortedRegion} from '../../helpers/interfaces';
 import {getSortedRegions} from '../../helpers/functions';
 
-export type DestinationScreenNavigationType = StackNavigationProp<ExploreStackParamsList, 'explore.home'>;
+export type DestinationScreenNavigationType = StackNavigationProp<StackParamsList, 'stack.destination'>;
 
 interface Props {
   navigation: DestinationScreenNavigationType
@@ -27,9 +27,14 @@ const Destination:React.FC<Props> = ({navigation}) => {
     if (regions?.regions && regions?.regions.length) {
       const data = getSortedRegions(regions.regions);
       setSortedRegions(data);
-      setFilteredSortedRegions(data);
     }
   }, [regions]);
+
+  useEffect(() => {
+    if (sortedRegions.length > 0) {
+      setFilteredSortedRegions(sortedRegions);
+    }
+  }, [sortedRegions]);
 
   const renderItem = ({item, index}: {item: SortedRegion, index: number}) => (
     <>
@@ -82,16 +87,20 @@ const Destination:React.FC<Props> = ({navigation}) => {
     setSearchValue('');
     setTimeout(() => {
       let itemIndex: number = 0;
+      let found: boolean = false;
       sortedRegions.forEach(region => {
         region.data.forEach(item => {
           if (item.id === selectedRegion) {
             itemIndex = sortedRegions.indexOf(region);
+            found = true;
           }
         });
       });
-      flatlistRef.current?.scrollToIndex({
-        index: itemIndex,
-      });
+      if (found) {
+        flatlistRef.current?.scrollToIndex({
+          index: itemIndex,
+        });
+      }
     }, 10);
   }, [selectedRegion]);
 
@@ -113,6 +122,7 @@ const Destination:React.FC<Props> = ({navigation}) => {
           renderItem={renderItem}
           keyExtractor={(item, index) => String(index)}
           ref={flatlistRef}
+          extraData={regions}
         />
       </View>
     </View>

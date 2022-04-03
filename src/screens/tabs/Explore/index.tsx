@@ -1,14 +1,15 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
+import {MainStackParamsList} from '../../../../App';
 import {ImageBackground, View, Image, Text, Button} from '../../../components';
 import globalStyles from '../../../helpers/globalStyles';
-import {ExploreStackParamsList} from '../../../navigators/Explore';
+import {StackParamsList} from '../../../navigators/Stack';
 import styles from './styles';
 
-export type ExploreScreenNavigationType = StackNavigationProp<ExploreStackParamsList, 'explore.home'>;
+export type ExploreScreenNavigationType = StackNavigationProp<StackParamsList&MainStackParamsList, 'stack'>;
 
 interface Props {
-  navigation: ExploreScreenNavigationType
+  navigation: ExploreScreenNavigationType&MainStackParamsList
 }
 
 const Explore: React.FC<Props> = ({navigation}) => (
@@ -18,7 +19,7 @@ const Explore: React.FC<Props> = ({navigation}) => (
     </ImageBackground>
     <View style={styles.contentContainer}>
       <View style={styles.boxContainer}>
-        <Button onPress={() => navigation.navigate('explore.destination')}>
+        <Button onPress={() => navigation.navigate('stack', {screen: 'stack.destination'})}>
           <Text font="semiBold" style={styles.title}>Destination</Text>
           <Text style={styles.subtitle}>Any destination</Text>
         </Button>
