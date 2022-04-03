@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {View, Header, SearchInput, RegionListItem, FlatList, StateListItem} from '../../components';
+import {FlatList} from 'react-native';
+import {View, Header, SearchInput, RegionListItem, StateListItem} from '../../components';
 import globalStyles from '../../helpers/globalStyles';
 import {ExploreStackParamsList} from '../../navigators/Explore';
 import {useQuery} from '@apollo/client';
@@ -17,13 +18,16 @@ interface Props {
 const Destination:React.FC<Props> = ({navigation}) => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [sortedRegions, setSortedRegions] = useState<SortedRegion[]>([]);
+  const [filteredSortedRegions, setFilteredSortedRegions] = useState<SortedRegion[]>([]);
   const [selectedRegion, setSelectedRegion] = useState<string>('');
   const {data: regions} = useQuery<Regions>(GET_REGIONS);
+  const flatlistRef = useRef<FlatList>(null);
 
   useEffect(() => {
     if (regions?.regions && regions?.regions.length) {
       const data = getSortedRegions(regions.regions);
       setSortedRegions(data);
+      setFilteredSortedRegions(data);
     }
   }, [regions]);
 
@@ -41,6 +45,56 @@ const Destination:React.FC<Props> = ({navigation}) => {
     </>
   );
 
+  useEffect(() => {
+    if (searchValue === '') {
+      setFilteredSortedRegions(sortedRegions);
+    } else {
+      const result: SortedRegion[] = [];
+      sortedRegions.forEach(region => {
+        if (region.state.toLowerCase().includes(searchValue.toLowerCase())) {
+          result.push(region);
+        } else {
+          const sortedRegion: SortedRegion = {
+            data: [],
+            state: '',
+          };
+          region.data.forEach(item => {
+            if (typeof item.name === 'string' && item.name.toLowerCase().includes(searchValue.toLowerCase())) {
+              const parts = item.name.split(new RegExp(`(${searchValue.toLowerCase()})`));
+              const newRegion: Region = {
+                ...item,
+                name: parts,
+              };
+              sortedRegion.data.push(newRegion);
+            }
+          });
+          if (sortedRegion.data.length > 0) {
+            sortedRegion.state = region.state;
+            result.push(sortedRegion);
+          }
+        }
+      });
+      setFilteredSortedRegions(result);
+    }
+  }, [searchValue]);
+
+  useEffect(() => {
+    setSearchValue('');
+    setTimeout(() => {
+      let itemIndex: number = 0;
+      sortedRegions.forEach(region => {
+        region.data.forEach(item => {
+          if (item.id === selectedRegion) {
+            itemIndex = sortedRegions.indexOf(region);
+          }
+        });
+      });
+      flatlistRef.current?.scrollToIndex({
+        index: itemIndex,
+      });
+    }, 10);
+  }, [selectedRegion]);
+
   const renderHeaderRightText: () => string|undefined = () => {
     if (selectedRegion === '') {
       return undefined;
@@ -55,9 +109,10 @@ const Destination:React.FC<Props> = ({navigation}) => {
       <View style={globalStyles.contentContainer}>
         <SearchInput placeholder="Search by destiation name" value={searchValue} setValue={setSearchValue} />
         <FlatList
-          data={sortedRegions}
+          data={filteredSortedRegions}
           renderItem={renderItem}
           keyExtractor={(item, index) => String(index)}
+          ref={flatlistRef}
         />
       </View>
     </View>

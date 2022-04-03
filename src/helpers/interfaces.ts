@@ -1,7 +1,7 @@
 import {ApolloError} from '@apollo/client';
 
 export interface Region {
-  name:string,
+  name:string|string[],
   id: string,
   stateName: string
 }
