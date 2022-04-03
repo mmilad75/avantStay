@@ -19,6 +19,7 @@ export default StyleSheet.create<Styles>({
   },
   title: {
     fontSize: scaleW(18),
+    color: colors.primary80,
   },
   button: {
     marginLeft: scaleW(10),

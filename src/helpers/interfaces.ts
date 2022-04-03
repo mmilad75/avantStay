@@ -13,6 +13,6 @@ export interface Regions {
 }
 
 export interface SortedRegion {
-  state: string,
+  state: string|string[],
   data: Region[]
 }

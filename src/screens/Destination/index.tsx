@@ -11,6 +11,7 @@ import {Region, Regions, SortedRegion} from '../../helpers/interfaces';
 import {getSortedRegions} from '../../helpers/functions';
 import styles from './styles';
 import {RouteProp} from '@react-navigation/native';
+import _ from 'lodash';
 
 export type DestinationScreenNavigationType = StackNavigationProp<StackParamsList, 'stack.destination'>;
 
@@ -61,16 +62,52 @@ const Destination:React.FC<Props> = ({navigation, route}) => {
     } else {
       const result: SortedRegion[] = [];
       sortedRegions.forEach(region => {
-        if (region.state.toLowerCase().includes(searchValue.toLowerCase())) {
-          result.push(region);
+        let stateName: string = '';
+        if (typeof region.state === 'string') {
+          stateName = region.state;
+        } else {
+          stateName = region.state.join('');
+        }
+
+        stateName = stateName.toLowerCase();
+        if (stateName.includes(searchValue.toLowerCase())) {
+          if (stateName.includes(searchValue.toLowerCase())) {
+            const parts: string[] = stateName.split(new RegExp(`(${searchValue.toLowerCase()})`));
+            if (parts[0] === '' && parts[1]) {
+              parts[1] = _.capitalize(parts[1]);
+            } else {
+              parts[0] = _.capitalize(parts[0]);
+            }
+
+            const sortedRegion: SortedRegion = {
+              data: region.data,
+              state: parts,
+            };
+
+            result.push(sortedRegion);
+          }
         } else {
           const sortedRegion: SortedRegion = {
             data: [],
             state: '',
           };
           region.data.forEach(item => {
-            if (typeof item.name === 'string' && item.name.toLowerCase().includes(searchValue.toLowerCase())) {
-              const parts = item.name.split(new RegExp(`(${searchValue.toLowerCase()})`));
+            let itemName: string = '';
+            if (typeof item.name === 'string') {
+              itemName = item.name;
+            } else {
+              itemName = item.name.join('');
+            }
+
+            itemName = itemName.toLowerCase();
+            if (itemName.includes(searchValue.toLowerCase())) {
+              const parts: string[] = itemName.split(new RegExp(`(${searchValue.toLowerCase()})`));
+              if (parts[0] === '' && parts[1]) {
+                parts[1] = _.capitalize(parts[1]);
+              } else {
+                parts[0] = _.capitalize(parts[0]);
+              }
+
               const newRegion: Region = {
                 ...item,
                 name: parts,
