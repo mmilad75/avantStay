@@ -25,7 +25,7 @@ const Destination:React.FC<Props> = ({navigation, route}) => {
   const [sortedRegions, setSortedRegions] = useState<SortedRegion[]>([]);
   const [filteredSortedRegions, setFilteredSortedRegions] = useState<SortedRegion[]>([]);
   const [selectedRegion, setSelectedRegion] = useState<Region|null>(null);
-  const {data: regions} = useQuery<Regions>(GET_REGIONS);
+  const {data: regions, loading} = useQuery<Regions>(GET_REGIONS);
   const flatlistRef = useRef<FlatList>(null);
   const setRegion = route?.params?.setRegion;
 
@@ -167,12 +167,17 @@ const Destination:React.FC<Props> = ({navigation, route}) => {
       <Header navigation={navigation} title="Where" onRightPress={() => setSelectedRegion(null)} rightText={renderHeaderRightText()} />
       <View style={globalStyles.contentContainer}>
         <SearchInput placeholder="Search by destiation name" value={searchValue} setValue={setSearchValue} />
-        <FlatList
+        {!loading && filteredSortedRegions.length > 0 && <FlatList
           data={filteredSortedRegions}
           renderItem={renderItem}
           keyExtractor={(item, index) => String(index)}
           ref={flatlistRef}
-        />
+        />}
+        {!loading && filteredSortedRegions.length === 0 && (
+          <Text style={styles.notFoundText}>
+            We could not find any destinations matching your request. Send us a chat if you need help!
+          </Text>
+        )}
       </View>
       <View style={styles.footerContainer}>
         <Button onPress={handleSearch} style={globalStyles.primaryButton}>
