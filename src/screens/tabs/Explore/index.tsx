@@ -38,7 +38,7 @@ const Explore: React.FC<Props> = ({navigation}) => {
             <Text style={styles.description}>Add guests</Text>
           </Button>
         </View>
-        <Button style={styles.button}>
+        <Button style={styles.button} onPress={() => navigation.navigate('stack', {screen: 'stack.homes', params: {region: destination}})}>
           <Text font="semiBold" style={styles.buttonText}>Explore homes</Text>
         </Button>
       </View>

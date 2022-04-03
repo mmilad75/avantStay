@@ -9,6 +9,7 @@ import Header from './Header';
 import SearchInput from './SearchInput';
 import RegionListItem from './RegionListItem';
 import StateListItem from './StateListItem';
+import HomeListItem from './HomeListItem';
 
 export {
   Text,
@@ -22,4 +23,5 @@ export {
   SearchInput,
   RegionListItem,
   StateListItem,
+  HomeListItem,
 };
