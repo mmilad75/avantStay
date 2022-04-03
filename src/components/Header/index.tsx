@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View, Button, Icon} from '../';
+import {View} from 'react-native';
+import {Text, Button, Icon} from '../';
 import colors from '../../helpers/colors';
 import {DestinationScreenNavigationType} from '../../screens/Destination';
 import styles from './styles';

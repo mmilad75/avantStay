@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import {Button, Text, View, Icon} from '../';
+import {View} from 'react-native';
+import {Button, Text, Icon} from '../';
 import styles from './styles';
 import colors from '../../helpers/colors';
 

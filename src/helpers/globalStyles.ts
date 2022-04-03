@@ -1,5 +1,5 @@
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {defaultSafeAreaInsetsTop, TABBAR_HEIGHT, scaleW} from './device';
+import {defaultSafeAreaInsetsTop, TABBAR_HEIGHT, scaleW, defaultSafeAreaInsetsBottom} from './device';
 import colors from './colors';
 
 interface Styles {
@@ -12,7 +12,9 @@ interface Styles {
 	bottomTabActive: TextStyle,
   tabBarContainer: ViewStyle,
   tabBarItemContainer: ViewStyle,
-  contentContainer: ViewStyle
+  contentContainer: ViewStyle,
+  primaryButton: ViewStyle,
+  primaryButtonText: TextStyle
 }
 
 const globalStyles = StyleSheet.create<Styles>({
@@ -24,7 +26,7 @@ const globalStyles = StyleSheet.create<Styles>({
     flex: 1,
     backgroundColor: colors.white,
     paddingTop: defaultSafeAreaInsetsTop,
-    paddingBottom: TABBAR_HEIGHT,
+    paddingBottom: defaultSafeAreaInsetsBottom,
   },
   centeredContainer: {
     flex: 1,
@@ -56,7 +58,21 @@ const globalStyles = StyleSheet.create<Styles>({
     alignItems: 'center',
   },
   contentContainer: {
+    flex: 1,
     padding: scaleW(20),
+    paddingBottom: 0,
+  },
+  primaryButton: {
+    backgroundColor: colors.primary,
+    borderRadius: scaleW(2),
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: scaleW(12),
+  },
+  primaryButtonText: {
+    color: colors.white,
+    fontSize: scaleW(15),
   },
 });
 

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 import React, {useState} from 'react';
-import {TextInput} from 'react-native';
-import {Button, Icon, View} from '../';
+import {TextInput, View} from 'react-native';
+import {Button, Icon} from '../';
 import colors from '../../helpers/colors';
 import styles from './styles';
 import {

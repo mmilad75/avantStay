@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View} from '../';
+import {View} from 'react-native';
+import {Text} from '../';
 import styles from './styles';
 
 interface Props {
