@@ -7,11 +7,6 @@ interface Styles {
   logo: ImageProps,
   background: ViewStyle,
   contentContainer: ViewStyle,
-  boxContainer: ViewStyle,
-  title: TextStyle,
-  subtitle: TextStyle,
-  description: TextStyle,
-  line: ViewStyle,
   button: TouchableOpacityProps,
   buttonText: TextStyle
 }
@@ -47,32 +42,6 @@ export default StyleSheet.create<Styles>({
     elevation: 5,
     paddingHorizontal: scaleW(20),
     paddingVertical: scaleW(26),
-  },
-  boxContainer: {
-    borderWidth: 1,
-    borderColor: colors.primary15,
-    paddingVertical: scaleW(10),
-    paddingHorizontal: scaleW(12),
-    marginBottom: scaleW(20),
-  },
-  title: {
-    color: colors.greenBlue2,
-    fontSize: scaleW(16),
-    marginBottom: scaleW(2),
-  },
-  subtitle: {
-    fontSize: scaleW(17),
-    color: colors.darkGray,
-  },
-  description: {
-    color: colors.primary30,
-    fontSize: scaleW(17),
-  },
-  line: {
-    width: '100%',
-    height: scaleW(1),
-    backgroundColor: colors.primary15,
-    marginVertical: scaleW(10),
   },
   button: {
     justifyContent: 'center',

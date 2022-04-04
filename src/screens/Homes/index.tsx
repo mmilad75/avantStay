@@ -1,17 +1,18 @@
+/* eslint-disable no-unused-vars */
 import {useQuery} from '@apollo/client';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useState} from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
-import {HomeListItem, Icon, Text} from '../../components';
+import {FilterHomes, HomeListItem, Icon, Text, Button} from '../../components';
 import styles from './styles';
 import {HOMES_PER_PAGE} from '../../config/config';
 import colors from '../../helpers/colors';
 import globalStyles from '../../helpers/globalStyles';
 import {Homes as HomesInterface} from '../../helpers/interfaces';
-import {StackParamsList} from '../../navigators/Stack';
+import {StackParamsList} from '../../navigators/Explore';
 import {GET_HOMES} from '../../qraphql/queries';
 
-export type HomesScreenNavigationType = StackNavigationProp<StackParamsList, 'stack.homes'>;
+export type HomesScreenNavigationType = StackNavigationProp<StackParamsList, 'explore.homes'>;
 
 interface Props {
   navigation: HomesScreenNavigationType
@@ -19,6 +20,7 @@ interface Props {
 
 const Homes: React.FC<Props> = ({navigation, route}) => {
   const [page, setPage] = useState<number>(1);
+  const [filterModalVisible, setFilterModalVisible] = useState(false);
   const region = route?.params?.region;
   const {loading, data} = useQuery<HomesInterface>(GET_HOMES, {
     variables: region?.id ? {
@@ -41,6 +43,10 @@ const Homes: React.FC<Props> = ({navigation, route}) => {
 
   return (
     <View style={[globalStyles.safeContainer, styles.container]}>
+      <FilterHomes
+        isVisible={filterModalVisible}
+        closeModal={() => setFilterModalVisible(false)}
+      />
       <FlatList
         data={data?.homes.results}
         renderItem={({item, index}) => <HomeListItem index={index + 1} total={data?.homes.count} item={item} navigation={navigation} />}
@@ -53,9 +59,9 @@ const Homes: React.FC<Props> = ({navigation, route}) => {
           <Text style={styles.filterSubtitleText}>Select dates to see prices...</Text>
         </View>
 
-        <View style={styles.filterIconContainer}>
+        <Button onPress={() => setFilterModalVisible(true)} style={styles.filterIconContainer}>
           <Icon name="filters-24" />
-        </View>
+        </Button>
       </View>
     </View>
   );

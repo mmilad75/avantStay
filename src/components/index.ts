@@ -10,6 +10,8 @@ import SearchInput from './SearchInput';
 import RegionListItem from './RegionListItem';
 import StateListItem from './StateListItem';
 import HomeListItem from './HomeListItem';
+import FilterHomes from './FilterHomes';
+import FilterBox from './FilterBox';
 
 export {
   Text,
@@ -24,4 +26,6 @@ export {
   RegionListItem,
   StateListItem,
   HomeListItem,
+  FilterHomes,
+  FilterBox,
 };
