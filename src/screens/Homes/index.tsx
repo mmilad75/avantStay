@@ -47,12 +47,19 @@ const Homes: React.FC<Props> = ({navigation, route}) => {
         isVisible={filterModalVisible}
         closeModal={() => setFilterModalVisible(false)}
       />
-      <FlatList
-        data={data?.homes.results}
-        renderItem={({item, index}) => <HomeListItem index={index + 1} total={data?.homes.count} item={item} navigation={navigation} />}
-        pagingEnabled={true}
-        showsVerticalScrollIndicator={false}
-      />
+      {data?.homes.results && data?.homes.results.length > 0 ? (
+        <FlatList
+          data={data?.homes.results}
+          renderItem={({item, index}) => <HomeListItem index={index + 1} total={data?.homes.count} item={item} navigation={navigation} />}
+          pagingEnabled={true}
+          showsVerticalScrollIndicator={false}
+        />
+      ) : (
+        <View style={styles.noResultContainer}>
+          <Text style={styles.noResultTitle} font="sangBlue">We couldn’t find any available homes...</Text>
+          <Text style={styles.noResultSubtitle}>Please, try to select other dates to see available homes inside selected regions.</Text>
+        </View>
+      )}
       <View style={styles.filterContainer}>
         <View>
           <Text font="semiBold" style={styles.filterTitleText}>When</Text>

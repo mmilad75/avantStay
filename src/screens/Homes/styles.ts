@@ -7,7 +7,10 @@ interface Styles {
   filterContainer: ViewStyle,
   filterIconContainer: ViewStyle,
   filterTitleText: TextStyle,
-  filterSubtitleText: TextStyle
+  filterSubtitleText: TextStyle,
+  noResultContainer: ViewStyle,
+  noResultTitle: TextStyle,
+  noResultSubtitle: TextStyle
 }
 
 export const filterContainerHeight = scaleW(55);
@@ -42,5 +45,22 @@ export default StyleSheet.create<Styles>({
   filterSubtitleText: {
     color: colors.primary30,
     fontSize: scaleW(15),
+  },
+  noResultContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: scaleW(40),
+  },
+  noResultTitle: {
+    color: colors.primary,
+    fontSize: scaleW(20),
+    textAlign: 'center',
+    marginBottom: scaleW(20),
+  },
+  noResultSubtitle: {
+    fontSize: scaleW(16),
+    color: colors.primary50,
+    textAlign: 'center',
   },
 });
