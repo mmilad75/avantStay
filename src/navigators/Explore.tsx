@@ -4,27 +4,36 @@ import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/st
 import Destination from '../screens/Destination';
 import {Region} from '../helpers/interfaces';
 import Homes from '../screens/Homes';
+import Explore from '../screens/tabs/Explore';
 
 export type StackParamsList = {
-  'stack.homes': undefined;
-	'stack.propertyDetail': undefined;
-  'stack.destination': {
+  'explore.home': undefined
+  'explore.homes': undefined;
+	'explore.propertyDetail': undefined;
+  'explore.destination': {
     setRegion: (item: Region|null) => void
   };
-  setRegion: undefined
 }
 
 const StackNavigator = createStackNavigator<StackParamsList>();
 
-const Stack: React.FC = () => (
+const ExploreStack: React.FC = () => (
   <StackNavigator.Navigator>
+    <StackNavigator.Screen
+      options={{
+        headerShown: false,
+      }}
+      name="explore.home"
+      component={Explore}
+    />
+
     <StackNavigator.Screen
       options={{
         headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         gestureDirection: 'vertical',
       }}
-      name="stack.destination"
+      name="explore.destination"
       component={Destination}
     />
 
@@ -32,10 +41,10 @@ const Stack: React.FC = () => (
       options={{
         headerShown: false,
       }}
-      name="stack.homes"
+      name="explore.homes"
       component={Homes}
     />
   </StackNavigator.Navigator>
 );
 
-export default Stack;
+export default ExploreStack;

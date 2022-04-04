@@ -8,7 +8,7 @@ import {Region} from '../../../helpers/interfaces';
 import {StackParamsList} from '../../../navigators/Stack';
 import styles from './styles';
 
-export type ExploreScreenNavigationType = StackNavigationProp<StackParamsList&MainStackParamsList, 'stack'>;
+export type ExploreScreenNavigationType = StackNavigationProp<StackParamsList, 'explore.home'>;
 
 interface Props {
   navigation: ExploreScreenNavigationType&MainStackParamsList
@@ -23,7 +23,7 @@ const Explore: React.FC<Props> = ({navigation}) => {
       </ImageBackground>
       <View style={styles.contentContainer}>
         <View style={styles.boxContainer}>
-          <Button onPress={() => navigation.navigate('stack', {screen: 'stack.destination', params: {setRegion: setDestination}})}>
+          <Button onPress={() => navigation.navigate('explore.destination', {setRegion: setDestination})}>
             <Text font="semiBold" style={styles.title}>Destination</Text>
             <Text style={styles.subtitle}>{destination === null ? 'Any destination' : destination.name }</Text>
           </Button>
@@ -38,7 +38,7 @@ const Explore: React.FC<Props> = ({navigation}) => {
             <Text style={styles.description}>Add guests</Text>
           </Button>
         </View>
-        <Button style={styles.button} onPress={() => navigation.navigate('stack', {screen: 'stack.homes', params: {region: destination}})}>
+        <Button style={styles.button} onPress={() => navigation.navigate('explore.homes', {region: destination})}>
           <Text font="semiBold" style={styles.buttonText}>Explore homes</Text>
         </Button>
       </View>

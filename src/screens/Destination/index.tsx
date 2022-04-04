@@ -4,7 +4,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {FlatList, View} from 'react-native';
 import {Header, SearchInput, RegionListItem, StateListItem, Text, Button} from '../../components';
 import globalStyles from '../../helpers/globalStyles';
-import {StackParamsList} from '../../navigators/Stack';
+import {StackParamsList} from '../../navigators/Explore';
 import {useQuery} from '@apollo/client';
 import {GET_REGIONS} from '../../qraphql/queries';
 import {Region, Regions, SortedRegion} from '../../helpers/interfaces';

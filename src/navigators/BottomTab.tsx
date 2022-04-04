@@ -4,9 +4,11 @@ import {Icon, Text} from '../components';
 import colors from '../helpers/colors';
 import globalStyles from '../helpers/globalStyles';
 import Booking from '../screens/tabs/Booking';
-import Explore from '../screens/tabs/Explore';
 import Profile from '../screens/tabs/Profile';
 import Support from '../screens/tabs/Support';
+import ExploreStack from './Explore';
+import {getFocusedRouteNameFromRoute, RouteProp} from '@react-navigation/native';
+import {ViewStyle} from 'react-native';
 
 export type BottomTabParamsList = {
 	'explore': undefined;
@@ -41,6 +43,15 @@ const handleTabBarLabel = (name:string|undefined, {focused}: {focused: boolean})
     {name}
   </Text>;
 
+const handleTabBarVisibility = (route: RouteProp<BottomTabParamsList, 'explore'>): ViewStyle => {
+  const routeName = getFocusedRouteNameFromRoute(route);
+  if (routeName === 'explore.destination') {
+    return {display: 'none'};
+  }
+
+  return globalStyles.tabBarContainer;
+};
+
 const BottomTab: React.FC = () => (
   <BottomTabNavigator.Navigator
     screenOptions={({route}) => ({
@@ -50,7 +61,7 @@ const BottomTab: React.FC = () => (
       tabBarStyle: globalStyles.tabBarContainer,
       tabBarItemStyle: globalStyles.tabBarItemContainer,
     })}>
-    <BottomTabNavigator.Screen name="explore" component={Explore} />
+    <BottomTabNavigator.Screen options={({route}) => ({tabBarStyle: handleTabBarVisibility(route)})} name="explore" component={ExploreStack} />
     <BottomTabNavigator.Screen name="booking" component={Booking} />
     <BottomTabNavigator.Screen name="profile" component={Profile} />
     <BottomTabNavigator.Screen name="support" component={Support} />

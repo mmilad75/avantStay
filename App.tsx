@@ -2,7 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {ApolloProvider} from '@apollo/client';
 import {apolloClient} from './src/config/config';
-import Stack from './src/navigators/Stack';
+import Stack from './src/navigators/Explore';
 import {createStackNavigator} from '@react-navigation/stack';
 import BottomTab from './src/navigators/BottomTab';
 

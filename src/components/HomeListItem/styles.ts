@@ -1,6 +1,6 @@
 import {ImageStyle, StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import colors from '../../helpers/colors';
-import {defaultSafeAreaInsetsBottom, defaultSafeAreaInsetsTop, height, scaleW} from '../../helpers/device';
+import {defaultSafeAreaInsetsBottom, defaultSafeAreaInsetsTop, height, scaleW, TABBAR_HEIGHT} from '../../helpers/device';
 import {filterContainerHeight} from '../../screens/Homes/styles';
 
 interface Styles {
@@ -22,7 +22,8 @@ interface Styles {
 const itemHeight = height
 - (defaultSafeAreaInsetsTop ? defaultSafeAreaInsetsTop : 0)
 - (defaultSafeAreaInsetsBottom ? defaultSafeAreaInsetsBottom : 0)
-- filterContainerHeight;
+- filterContainerHeight
+- TABBAR_HEIGHT;
 
 export default StyleSheet.create<Styles>({
   container: {
