@@ -5,6 +5,7 @@ import Destination from '../screens/Destination';
 import {Region} from '../helpers/interfaces';
 import Homes from '../screens/Homes';
 import Explore from '../screens/tabs/Explore';
+import PropertyDetail from '../screens/PropertyDetail';
 
 export type StackParamsList = {
   'explore.home': undefined
@@ -43,6 +44,12 @@ const ExploreStack: React.FC = () => (
       }}
       name="explore.homes"
       component={Homes}
+    />
+
+    <StackNavigator.Screen
+      options={{headerShown: false}}
+      name="explore.propertyDetail"
+      component={PropertyDetail}
     />
   </StackNavigator.Navigator>
 );

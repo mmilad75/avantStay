@@ -27,8 +27,8 @@ const Explore: React.FC<Props> = ({navigation}) => {
           setDestination={setDestination}
           navigation={navigation}
         />
-        <Button style={styles.button} onPress={() => navigation.navigate('explore.homes', {region: destination})}>
-          <Text font="semiBold" style={styles.buttonText}>Explore homes</Text>
+        <Button style={globalStyles.borderedButton} onPress={() => navigation.navigate('explore.homes', {region: destination})}>
+          <Text font="semiBold" style={globalStyles.borderedButtonText}>Explore homes</Text>
         </Button>
       </View>
     </View>

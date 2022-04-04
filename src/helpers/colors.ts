@@ -17,4 +17,5 @@ export default {
   greenBlue: 'rgba(83, 195, 208, 1)',
   greenBlue2: 'rgba(52, 174, 188, 1)',
   greenBlue3: 'rgba(163, 223, 230, 1)',
+  blue: 'rgba(28, 93, 159, 1);',
 };

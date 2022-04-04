@@ -50,7 +50,7 @@ const Homes: React.FC<Props> = ({navigation, route}) => {
       {data?.homes.results && data?.homes.results.length > 0 ? (
         <FlatList
           data={data?.homes.results}
-          renderItem={({item, index}) => <HomeListItem index={index + 1} total={data?.homes.count} item={item} navigation={navigation} />}
+          renderItem={({item, index}) => <HomeListItem navigation={navigation} index={index + 1} total={data?.homes.count} item={item} navigation={navigation} />}
           pagingEnabled={true}
           showsVerticalScrollIndicator={false}
         />

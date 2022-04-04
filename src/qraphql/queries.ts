@@ -33,3 +33,27 @@ export const GET_HOMES = gql`
     }
   }
 `;
+
+export const GET_HOME = gql`
+  query Home($id: UUID!) {
+    home (id: $id) {
+      id
+      title
+      description
+      photos {
+        url
+        listOrder
+      }
+      roomsCount
+      bathroomsCount
+      bedsCount
+      maxOccupancy
+      hasPool
+      amenities
+      regionName
+      cityName
+      stateName
+      stateCode
+    }
+  }
+`;

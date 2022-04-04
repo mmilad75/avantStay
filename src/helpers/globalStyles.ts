@@ -1,4 +1,4 @@
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import {StyleSheet, TextStyle, TouchableOpacityProps, ViewStyle} from 'react-native';
 import {defaultSafeAreaInsetsTop, TABBAR_HEIGHT, scaleW, defaultSafeAreaInsetsBottom} from './device';
 import colors from './colors';
 
@@ -14,7 +14,10 @@ interface Styles {
   tabBarItemContainer: ViewStyle,
   contentContainer: ViewStyle,
   primaryButton: ViewStyle,
-  primaryButtonText: TextStyle
+  primaryButtonText: TextStyle,
+  ml2: ViewStyle,
+  borderedButton: TouchableOpacityProps,
+  borderedButtonText: TextStyle
 }
 
 const globalStyles = StyleSheet.create<Styles>({
@@ -72,6 +75,19 @@ const globalStyles = StyleSheet.create<Styles>({
   },
   primaryButtonText: {
     color: colors.white,
+    fontSize: scaleW(15),
+  },
+  ml2: {
+    marginLeft: scaleW(2),
+  },
+  borderedButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: scaleW(10),
+    borderColor: colors.primaryDark,
+    borderWidth: 2,
+  },
+  borderedButtonText: {
     fontSize: scaleW(15),
   },
 });

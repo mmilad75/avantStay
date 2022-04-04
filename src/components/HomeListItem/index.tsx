@@ -4,16 +4,17 @@ import {View} from 'react-native';
 import {HomeShortened} from '../../helpers/interfaces';
 import styles from './styles';
 import colors from '../../helpers/colors';
+import {HomesScreenNavigationType} from '../../screens/Homes';
 
 interface Props {
-  navigation: any,
+  navigation: HomesScreenNavigationType,
   item: HomeShortened,
   index: number,
   total: number|undefined
 }
 
 const HomeListItem: React.FC<Props> = ({navigation, item, index, total}) => (
-  <Button style={styles.container}>
+  <Button style={styles.container} onPress={() => navigation.navigate('explore.propertyDetail', {id: item.id})}>
     <View style={styles.headerContainer}>
       <View style={styles.imageContainer}>
         <View style={styles.counterContainer}>

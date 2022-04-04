@@ -1,4 +1,4 @@
-import {ImageProps, StyleSheet, TextStyle, TouchableOpacityProps, ViewStyle} from 'react-native';
+import {ImageProps, StyleSheet, ViewStyle} from 'react-native';
 import colors from '../../../helpers/colors';
 import {safeAreaInsetsTop, scaleW} from '../../../helpers/device';
 
@@ -7,8 +7,6 @@ interface Styles {
   logo: ImageProps,
   background: ViewStyle,
   contentContainer: ViewStyle,
-  button: TouchableOpacityProps,
-  buttonText: TextStyle
 }
 
 export default StyleSheet.create<Styles>({
@@ -42,15 +40,5 @@ export default StyleSheet.create<Styles>({
     elevation: 5,
     paddingHorizontal: scaleW(20),
     paddingVertical: scaleW(26),
-  },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: scaleW(10),
-    borderColor: colors.primaryDark,
-    borderWidth: 2,
-  },
-  buttonText: {
-    fontSize: scaleW(15),
   },
 });

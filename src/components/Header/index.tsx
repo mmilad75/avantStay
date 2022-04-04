@@ -3,19 +3,27 @@ import {View} from 'react-native';
 import {Text, Button, Icon} from '../';
 import colors from '../../helpers/colors';
 import {DestinationScreenNavigationType} from '../../screens/Destination';
+import {PropertyDetailScreenNavigationType} from '../../screens/PropertyDetail';
 import styles from './styles';
 
 interface Props {
-  navigation: DestinationScreenNavigationType,
+  navigation: DestinationScreenNavigationType|PropertyDetailScreenNavigationType,
   title?: string,
   rightText?: string | undefined,
-  onRightPress?: () => void
+  onRightPress?: () => void,
+  transparent?: boolean
 }
 
-const Header: React.FC<Props> = ({navigation, title, rightText, onRightPress}) => (
+const Header: React.FC<Props> = ({
+  navigation,
+  title,
+  rightText,
+  onRightPress,
+  transparent = false,
+}) => (
   <View style={styles.container}>
     <Button style={styles.iconContainer} onPress={() => navigation.goBack()}>
-      <Icon size={20} color={colors.primary} name="back-24" />
+      <Icon size={20} color={transparent ? colors.white : colors.primary} name="back-24" />
     </Button>
     <View style={styles.titleContainer}>
       <Text font="semiBold" style={styles.title}>{title}</Text>

@@ -19,7 +19,7 @@ interface Styles {
   filterContainer: ViewStyle
 }
 
-const itemHeight = height
+export const homeListItemHeight = height
 - (defaultSafeAreaInsetsTop ? defaultSafeAreaInsetsTop : 0)
 - (defaultSafeAreaInsetsBottom ? defaultSafeAreaInsetsBottom : 0)
 - filterContainerHeight
@@ -27,7 +27,7 @@ const itemHeight = height
 
 export default StyleSheet.create<Styles>({
   container: {
-    height: itemHeight,
+    height: homeListItemHeight,
     paddingVertical: scaleW(10),
   },
   headerContainer: {

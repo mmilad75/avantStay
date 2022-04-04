@@ -36,6 +36,23 @@ export interface HomeShortened {
   photos: HomePhoto[]
 }
 
+export interface Home {
+  id: string
+  title: string
+  description: string
+  photos: HomePhoto[]
+  roomsCount: number
+  bathroomsCount: number
+  bedsCount: number
+  maxOccupancy: number
+  hasPool: boolean
+  amenities: string[]
+  regionName: string
+  cityName: string
+  stateName: string
+  stateCode: string
+}
+
 export interface Homes {
   homes: {
     count: number,

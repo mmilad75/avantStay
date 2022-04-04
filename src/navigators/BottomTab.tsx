@@ -45,7 +45,7 @@ const handleTabBarLabel = (name:string|undefined, {focused}: {focused: boolean})
 
 const handleTabBarVisibility = (route: RouteProp<BottomTabParamsList, 'explore'>): ViewStyle => {
   const routeName = getFocusedRouteNameFromRoute(route);
-  if (routeName === 'explore.destination') {
+  if (routeName === 'explore.destination' || routeName === 'explore.propertyDetail') {
     return {display: 'none'};
   }
 
