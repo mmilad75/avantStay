@@ -14,9 +14,13 @@ interface Styles {
   featureText: TextStyle,
   imageContainer: ViewStyle,
   image: ImageStyle,
-  counterContainer: ViewStyle,
+  headInfoContainer: ViewStyle,
   counterText: TextStyle,
-  filterContainer: ViewStyle
+  filterContainer: ViewStyle,
+  totalPriceCounterContainer: ViewStyle,
+  totalPriceCounterNightText: TextStyle,
+  totalPriceCounterPriceText: TextStyle,
+  homesCounterContainer: ViewStyle
 }
 
 export const homeListItemHeight = height
@@ -68,21 +72,44 @@ export default StyleSheet.create<Styles>({
     flex: 1,
     borderRadius: scaleW(10),
   },
-  counterContainer: {
+  headInfoContainer: {
     position: 'absolute',
     top: 0,
     zIndex: 2,
     alignSelf: 'center',
     borderBottomLeftRadius: scaleW(8),
     borderBottomRightRadius: scaleW(8),
-    padding: scaleW(10),
     backgroundColor: 'white',
   },
   counterText: {
     color: colors.primary,
+    textAlign: 'center',
   },
   filterContainer: {
     height: filterContainerHeight,
     backgroundColor: 'blue',
+  },
+  totalPriceCounterContainer: {
+    backgroundColor: colors.primaryDark,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: scaleW(10),
+    paddingVertical: scaleW(7),
+    borderBottomLeftRadius: scaleW(8),
+    borderBottomRightRadius: scaleW(8),
+    alignItems: 'center',
+  },
+  totalPriceCounterNightText: {
+    color: colors.white60,
+    fontSize: scaleW(13),
+  },
+  totalPriceCounterPriceText: {
+    color: colors.white,
+    fontSize: scaleW(16),
+    marginLeft: scaleW(30),
+  },
+  homesCounterContainer: {
+    paddingHorizontal: scaleW(10),
+    paddingVertical: scaleW(7),
   },
 });

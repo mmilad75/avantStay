@@ -2,6 +2,7 @@ export default {
   transparent: 'rgba(0, 0, 0, 0)',
   black: 'rgba(23, 23, 23, 1)',
   white: 'rgba(255, 255, 255, 1)',
+  white60: 'rgba(255, 255, 255, 0.6)',
   darkGray: 'rgba(80, 80, 81, 1)',
   gray: 'rgba(2, 43, 84, .3)',
   pink: 'rgba(239, 84, 177, 1)',

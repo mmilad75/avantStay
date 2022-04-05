@@ -17,14 +17,20 @@ const HomeListItem: React.FC<Props> = ({navigation, item, index, total}) => (
   <Button style={styles.container} onPress={() => navigation.navigate('explore.propertyDetail', {id: item.id})}>
     <View style={styles.headerContainer}>
       <View style={styles.imageContainer}>
-        <View style={styles.counterContainer}>
-          <Text style={styles.counterText}>
-            <Text font="semiBold">{index}</Text>
-            <Text> of </Text>
-            <Text font="semiBold">{total}</Text>
-            <Text> homes in </Text>
-            <Text font="semiBold">{item.regionName}</Text>
-          </Text>
+        <View style={styles.headInfoContainer}>
+          <View style={styles.homesCounterContainer}>
+            <Text style={styles.counterText}>
+              <Text font="semiBold">{index}</Text>
+              <Text> of </Text>
+              <Text font="semiBold">{total}</Text>
+              <Text> homes in </Text>
+              <Text font="semiBold">{item.regionName}</Text>
+            </Text>
+          </View>
+          <View style={styles.totalPriceCounterContainer}>
+            <Text style={styles.totalPriceCounterNightText}>Total • 10 nights</Text>
+            <Text font="semiBold" style={styles.totalPriceCounterPriceText}>$2,390</Text>
+          </View>
         </View>
         <CacheImage style={styles.image} uri={item.photos[0].url} />
       </View>
