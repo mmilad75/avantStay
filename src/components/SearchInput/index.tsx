@@ -10,7 +10,6 @@ import {
   SourceSansPro_600SemiBold,
   useFonts,
 } from '@expo-google-fonts/source-sans-pro';
-import AppLoading from 'expo-app-loading';
 
 interface Props {
   setValue: (val: string) => void,
@@ -26,7 +25,7 @@ const SearchInput: React.FC<Props> = ({setValue, value, placeholder}) => {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return (

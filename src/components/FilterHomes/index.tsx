@@ -24,10 +24,10 @@ const FilterHomes: React.FC<Props> = ({isVisible, closeModal}) => (
           </Button>
         </View>
         <View style={styles.bodyContainer}>
-          <FilterBox showOrder={true} destination={null} setDestination={() => console.log('asd')} />
+          <FilterBox showOrder={true} />
         </View>
         <View style={styles.footerContainer}>
-          <Button style={globalStyles.primaryButton}>
+          <Button style={globalStyles.primaryButton} onPress={closeModal}>
             <Text font="semiBold" style={globalStyles.primaryButtonText}>Show homes</Text>
           </Button>
         </View>

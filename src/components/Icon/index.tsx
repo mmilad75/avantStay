@@ -1,5 +1,4 @@
 import React from 'react';
-import AppLoading from 'expo-app-loading';
 import {useFonts} from 'expo-font';
 import {createIconSetFromFontello} from '@expo/vector-icons';
 import fontelloConfig from './config.json';
@@ -19,7 +18,7 @@ const Icon: React.FC<Props> = ({name, size = 24, color = colors.primary}) => {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return (

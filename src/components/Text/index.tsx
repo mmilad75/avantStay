@@ -7,7 +7,6 @@ import {
   SourceSansPro_600SemiBold,
   useFonts,
 } from '@expo-google-fonts/source-sans-pro';
-import AppLoading from 'expo-app-loading';
 
 interface Props {
   font?: 'regular' | 'semiBold' | 'sangBlue'
@@ -20,7 +19,7 @@ const Text: React.FC<TextProps&Props> = ({children, font = 'regular', ...props})
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   return (<RNText {...props} style={[styles.text, {fontFamily: font === 'regular' ? 'SourceSansPro_400Regular' : font === 'sangBlue' ? 'SangBleu' : 'SourceSansPro_600SemiBold'}, props.style]}>{children}</RNText>);

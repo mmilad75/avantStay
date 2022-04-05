@@ -10,10 +10,10 @@ import PropertyDetail from '../screens/PropertyDetail';
 export type StackParamsList = {
   'explore.home': undefined
   'explore.homes': undefined;
-	'explore.propertyDetail': undefined;
-  'explore.destination': {
-    setRegion: (item: Region|null) => void
+	'explore.propertyDetail': {
+    id: string
   };
+  'explore.destination': undefined;
 }
 
 const StackNavigator = createStackNavigator<StackParamsList>();

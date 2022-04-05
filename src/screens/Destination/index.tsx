@@ -8,49 +8,46 @@ import {StackParamsList} from '../../navigators/Explore';
 import {useQuery} from '@apollo/client';
 import {GET_REGIONS} from '../../qraphql/queries';
 import {Region, Regions, SortedRegion} from '../../helpers/interfaces';
-import {getSortedRegions} from '../../helpers/functions';
 import styles from './styles';
 import {RouteProp} from '@react-navigation/native';
 import _ from 'lodash';
+import {regionStore} from '../../store';
+import {observer} from 'mobx-react-lite';
 
-export type DestinationScreenNavigationType = StackNavigationProp<StackParamsList, 'stack.destination'>;
+export type DestinationScreenNavigationType = StackNavigationProp<StackParamsList, 'explore.destination'>;
 
 interface Props {
   navigation: DestinationScreenNavigationType,
   route: RouteProp<StackParamsList>
 }
 
-const Destination:React.FC<Props> = ({navigation, route}) => {
+const Destination:React.FC<Props> = ({navigation}) => {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [sortedRegions, setSortedRegions] = useState<SortedRegion[]>([]);
   const [filteredSortedRegions, setFilteredSortedRegions] = useState<SortedRegion[]>([]);
-  const [selectedRegion, setSelectedRegion] = useState<Region|null>(null);
   const {data: regions, loading} = useQuery<Regions>(GET_REGIONS);
   const flatlistRef = useRef<FlatList>(null);
-  const setRegion = route?.params?.setRegion;
 
   useEffect(() => {
     if (regions?.regions && regions?.regions.length) {
-      const data = getSortedRegions(regions.regions);
-      setSortedRegions(data);
+      regionStore.addRegions(regions.regions);
     }
   }, [regions]);
 
   useEffect(() => {
-    if (sortedRegions.length > 0) {
-      setFilteredSortedRegions(sortedRegions);
+    if (regionStore.regions.length > 0) {
+      setFilteredSortedRegions(regionStore.regions);
     }
-  }, [sortedRegions]);
+  }, [regionStore.regions]);
 
   const renderItem = ({item, index}: {item: SortedRegion, index: number}) => (
     <>
       {index === 0 && (
-        <RegionListItem setSelected={() => setSelectedRegion(null)} title="Any destination" isSelected={selectedRegion === null} />
+        <RegionListItem setSelected={() => regionStore.addDestination(null)} title="Any destination" isSelected={regionStore.destination === null} />
       )}
       <StateListItem title={item.state} />
       <FlatList
         data={item.data}
-        renderItem={({item}:{item: Region}) => <RegionListItem setSelected={() => setSelectedRegion(item)} title={item.name} isSelected={selectedRegion?.id === item.id} />}
+        renderItem={({item}:{item: Region}) => <RegionListItem setSelected={() => regionStore.addDestination(item)} title={item.name} isSelected={regionStore.destination?.id === item.id} />}
         keyExtractor={(item, index) => String(index)}
       />
     </>
@@ -58,10 +55,10 @@ const Destination:React.FC<Props> = ({navigation, route}) => {
 
   useEffect(() => {
     if (searchValue === '') {
-      setFilteredSortedRegions(sortedRegions);
+      setFilteredSortedRegions(regionStore.regions);
     } else {
       const result: SortedRegion[] = [];
-      sortedRegions.forEach(region => {
+      regionStore.regions.forEach(region => {
         let stateName: string = '';
         if (typeof region.state === 'string') {
           stateName = region.state;
@@ -130,24 +127,24 @@ const Destination:React.FC<Props> = ({navigation, route}) => {
     setTimeout(() => {
       let itemIndex: number = 0;
       let found: boolean = false;
-      sortedRegions.forEach(region => {
+      regionStore.regions.forEach(region => {
         region.data.forEach(item => {
-          if (item.id === selectedRegion?.id) {
-            itemIndex = sortedRegions.indexOf(region);
+          if (item.id === regionStore.destination?.id) {
+            itemIndex = regionStore.regions.indexOf(region);
             found = true;
           }
         });
       });
-      if (found) {
+      if (found && filteredSortedRegions.length) {
         flatlistRef.current?.scrollToIndex({
           index: itemIndex,
         });
       }
     }, 10);
-  }, [selectedRegion]);
+  }, [regionStore.destination]);
 
   const renderHeaderRightText: () => string|undefined = () => {
-    if (selectedRegion === null) {
+    if (regionStore.destination === null) {
       return undefined;
     }
 
@@ -155,16 +152,13 @@ const Destination:React.FC<Props> = ({navigation, route}) => {
   };
 
   const handleSearch = () => {
-    if (setRegion) {
-      setRegion(selectedRegion);
-    }
-
+    regionStore.addDestination(regionStore.destination);
     navigation.goBack();
   };
 
   return (
     <View style={globalStyles.safeContainer}>
-      <Header navigation={navigation} title="Where" onRightPress={() => setSelectedRegion(null)} rightText={renderHeaderRightText()} />
+      <Header navigation={navigation} title="Where" onRightPress={() => regionStore.addDestination(null)} rightText={renderHeaderRightText()} />
       <View style={globalStyles.contentContainer}>
         <SearchInput placeholder="Search by destiation name" value={searchValue} setValue={setSearchValue} />
         {!loading && filteredSortedRegions.length > 0 && <FlatList
@@ -175,7 +169,7 @@ const Destination:React.FC<Props> = ({navigation, route}) => {
         />}
         {!loading && filteredSortedRegions.length === 0 && (
           <Text style={styles.notFoundText}>
-            We could not find any destinations matching your request. Send us a chat if you need help!
+              We could not find any destinations matching your request. Send us a chat if you need help!
           </Text>
         )}
       </View>
@@ -188,4 +182,4 @@ const Destination:React.FC<Props> = ({navigation, route}) => {
   );
 };
 
-export default Destination;
+export default observer(Destination);
