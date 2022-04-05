@@ -2,7 +2,7 @@ import Text from './Text';
 import TextInput from './TextInput';
 import Icon from './Icon';
 import Button from './Button';
-import CacheImage from './CacheImage';
+import CachedImage from './CachedImage';
 import Image from './Image';
 import ImageBackground from './ImageBackground';
 import Header from './Header';
@@ -18,7 +18,7 @@ export {
   TextInput,
   Icon,
   Button,
-  CacheImage,
+  CachedImage,
   Image,
   ImageBackground,
   Header,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Text, CacheImage, Icon} from '..';
+import {Button, Text, CachedImage, Icon} from '..';
 import {View} from 'react-native';
 import {HomeShortened} from '../../helpers/interfaces';
 import styles from './styles';
@@ -32,7 +32,7 @@ const HomeListItem: React.FC<Props> = ({navigation, item, index, total}) => (
             <Text font="semiBold" style={styles.totalPriceCounterPriceText}>$2,390</Text>
           </View>
         </View>
-        <CacheImage style={styles.image} uri={item.photos[0].url} />
+        <CachedImage style={styles.image} source={{uri: item.photos[0].url}} />
       </View>
     </View>
     <View style={styles.footerContainer}>

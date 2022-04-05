@@ -7,6 +7,8 @@ export default {
   gray: 'rgba(2, 43, 84, .3)',
   pink: 'rgba(239, 84, 177, 1)',
   primary: 'rgba(2, 43, 84, 1)',
+  primary3: 'rgba(2, 43, 84, .03)',
+  primary10: 'rgba(2, 43, 84, .10)',
   primary15: 'rgba(2, 43, 84, .15)',
   primary30: 'rgba(2, 43, 84, .3)',
   primary40: 'rgba(2, 43, 84, .4)',

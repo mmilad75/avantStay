@@ -1,7 +1,7 @@
 import {useQuery} from '@apollo/client';
 import React, {useState, useEffect, useCallback, ReactNode, useRef} from 'react';
 import {View, ActivityIndicator, Animated} from 'react-native';
-import {Text, Icon, Button, CacheImage, Header} from '../../components';
+import {Text, Icon, Button, CachedImage, Header} from '../../components';
 import styles from './styles';
 import {Home} from '../../helpers/interfaces';
 import {GET_HOME} from '../../qraphql/queries';
@@ -111,7 +111,7 @@ const PropertyDetail: React.FC<Props> = ({route}) => {
       >
         <View style={styles.headContainer}>
           <View style={styles.imageContainer}>
-            <CacheImage style={styles.image} uri={data.home.photos[0].url} />
+            <CachedImage style={styles.image} source={{uri: data.home.photos[0].url}} />
           </View>
         </View>
         <View style={styles.bodyContainer}>
