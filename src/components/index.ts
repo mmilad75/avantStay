@@ -12,6 +12,7 @@ import StateListItem from './StateListItem';
 import HomeListItem from './HomeListItem';
 import FilterHomes from './FilterHomes';
 import FilterBox from './FilterBox';
+import Loading from './Loading';
 
 export {
   Text,
@@ -28,4 +29,5 @@ export {
   HomeListItem,
   FilterHomes,
   FilterBox,
+  Loading,
 };

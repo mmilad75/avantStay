@@ -3,7 +3,7 @@ import {useQuery} from '@apollo/client';
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useState, useEffect} from 'react';
 import {View, FlatList, ActivityIndicator} from 'react-native';
-import {FilterHomes, HomeListItem, Icon, Text, Button} from '../../components';
+import {FilterHomes, HomeListItem, Icon, Text, Button, Loading} from '../../components';
 import styles from './styles';
 import {HOMES_PER_PAGE} from '../../config/config';
 import colors from '../../helpers/colors';
@@ -52,22 +52,28 @@ const Homes: React.FC<Props> = ({navigation}) => {
     <Observer>
       {() => (
         <View style={[globalStyles.safeContainer, styles.container]}>
-          <FilterHomes
-            isVisible={filterModalVisible}
-            closeModal={() => setFilterModalVisible(false)}
-          />
-          {homeStore.homes && homeStore.count > 0 ? (
-            <FlatList
-              data={homeStore.homes}
-              renderItem={({item, index}) => <HomeListItem index={index + 1} total={homeStore.count} item={item} navigation={navigation} />}
-              pagingEnabled={true}
-              showsVerticalScrollIndicator={false}
-            />
+          {loading ? (
+            <Loading text="Loading Homes" />
           ) : (
-            <View style={styles.noResultContainer}>
-              <Text style={styles.noResultTitle} font="sangBlue">We couldn’t find any available homes...</Text>
-              <Text style={styles.noResultSubtitle}>Please, try to select other dates to see available homes inside selected regions.</Text>
-            </View>
+            <>
+              <FilterHomes
+                isVisible={filterModalVisible}
+                closeModal={() => setFilterModalVisible(false)}
+              />
+              {homeStore.homes && homeStore.count > 0 ? (
+                <FlatList
+                  data={homeStore.homes}
+                  renderItem={({item, index}) => <HomeListItem index={index + 1} total={homeStore.count} item={item} navigation={navigation} />}
+                  pagingEnabled={true}
+                  showsVerticalScrollIndicator={false}
+                />
+              ) : (
+                <View style={styles.noResultContainer}>
+                  <Text style={styles.noResultTitle} font="sangBlue">We couldn’t find any available homes...</Text>
+                  <Text style={styles.noResultSubtitle}>Please, try to select other dates to see available homes inside selected regions.</Text>
+                </View>
+              )}
+            </>
           )}
           <View style={styles.filterContainer}>
             <View>
