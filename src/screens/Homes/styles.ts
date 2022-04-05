@@ -10,7 +10,9 @@ interface Styles {
   filterSubtitleText: TextStyle,
   noResultContainer: ViewStyle,
   noResultTitle: TextStyle,
-  noResultSubtitle: TextStyle
+  noResultSubtitle: TextStyle,
+  badgeContainer: ViewStyle,
+  badgeText: TextStyle
 }
 
 export const filterContainerHeight = scaleW(55);
@@ -62,5 +64,23 @@ export default StyleSheet.create<Styles>({
     fontSize: scaleW(16),
     color: colors.primary50,
     textAlign: 'center',
+  },
+  badgeContainer: {
+    position: 'absolute',
+    top: 0,
+    right: -scaleW(6),
+    backgroundColor: colors.primary,
+    borderRadius: scaleW(17),
+    width: scaleW(17),
+    height: scaleW(17),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: scaleW(2),
+    borderColor: colors.white,
+    zIndex: 10,
+  },
+  badgeText: {
+    color: colors.white,
+    fontSize: scaleW(10),
   },
 });

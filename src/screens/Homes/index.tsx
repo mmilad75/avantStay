@@ -82,6 +82,9 @@ const Homes: React.FC<Props> = ({navigation}) => {
             </View>
 
             <Button onPress={() => setFilterModalVisible(true)} style={styles.filterIconContainer}>
+              <View style={styles.badgeContainer}>
+                <Text font="sangBlue" style={styles.badgeText}>1</Text>
+              </View>
               <Icon name="filters-24" />
             </Button>
           </View>
