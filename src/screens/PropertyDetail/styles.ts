@@ -57,7 +57,7 @@ export default StyleSheet.create<Styles>({
     paddingBottom: scaleW(1),
   },
   image: {
-    flex: 1,
+    width,
   },
   bodyContainer: {
     paddingHorizontal: BODY_PADDING,

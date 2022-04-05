@@ -1,6 +1,6 @@
 import {useQuery} from '@apollo/client';
 import React, {useState, useEffect, useCallback, ReactNode, useRef} from 'react';
-import {View, ActivityIndicator, Animated} from 'react-native';
+import {View, ActivityIndicator, Animated, FlatList} from 'react-native';
 import {Text, Icon, Button, CachedImage, Header} from '../../components';
 import styles from './styles';
 import {Home} from '../../helpers/interfaces';
@@ -11,6 +11,7 @@ import {StackParamsList} from '../../navigators/Explore';
 import colors from '../../helpers/colors';
 import globalStyles from '../../helpers/globalStyles';
 import {scaleW} from '../../helpers/device';
+import _ from 'lodash';
 
 export type PropertyDetailScreenNavigationType = StackNavigationProp<StackParamsList, 'explore.propertyDetail'>;
 
@@ -33,6 +34,7 @@ const PropertyDetail: React.FC<Props> = ({route}) => {
   };
 
   useEffect(() => {
+    console.log('first', _.orderBy(data?.home.photos, ['listOrder']));
     // Filter amenities to show only those which their icon are in the app
     if (data?.home.amenities.length > 0) {
       const result: string[] = [];
@@ -111,7 +113,13 @@ const PropertyDetail: React.FC<Props> = ({route}) => {
       >
         <View style={styles.headContainer}>
           <View style={styles.imageContainer}>
-            <CachedImage style={styles.image} source={{uri: data.home.photos[0].url}} />
+            <FlatList
+              data={_.orderBy(data?.home.photos, ['listOrder'])}
+              renderItem={({item}) => <CachedImage style={styles.image} source={{uri: item.url}} />}
+              horizontal={true}
+              pagingEnabled={true}
+              showsHorizontalScrollIndicator={false}
+            />
           </View>
         </View>
         <View style={styles.bodyContainer}>
