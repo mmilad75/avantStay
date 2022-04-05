@@ -1,4 +1,5 @@
 import React from 'react';
+import {ViewStyle, Animated} from 'react-native';
 import {View} from 'react-native';
 import {Text, Button, Icon} from '../';
 import colors from '../../helpers/colors';
@@ -11,7 +12,9 @@ interface Props {
   title?: string,
   rightText?: string | undefined,
   onRightPress?: () => void,
-  transparent?: boolean
+  containerStyle?: ((ViewStyle) | {backgroundColor: Animated.AnimatedInterpolation})[],
+  iconColor?: string,
+  RightComponent?: React.FC
 }
 
 const Header: React.FC<Props> = ({
@@ -19,21 +22,26 @@ const Header: React.FC<Props> = ({
   title,
   rightText,
   onRightPress,
-  transparent = false,
+  containerStyle,
+  iconColor,
+  RightComponent,
 }) => (
-  <View style={styles.container}>
+  <Animated.View style={[styles.container, containerStyle]}>
     <Button style={styles.iconContainer} onPress={() => navigation.goBack()}>
-      <Icon size={20} color={transparent ? colors.white : colors.primary} name="back-24" />
+      <Icon size={20} color={iconColor ? iconColor : colors.primary} name="back-24" />
     </Button>
     <View style={styles.titleContainer}>
       <Text font="semiBold" style={styles.title}>{title}</Text>
     </View>
-    {rightText && (
+    {RightComponent && (
+      <RightComponent />
+    )}
+    {!RightComponent && rightText && (
       <Button style={styles.rightButtonContainer} onPress={onRightPress}>
         <Text style={styles.rightButtonText}>{rightText}</Text>
       </Button>
     )}
-  </View>
+  </Animated.View>
 );
 
 export default Header;

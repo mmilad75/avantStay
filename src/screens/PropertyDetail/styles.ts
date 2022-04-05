@@ -1,4 +1,5 @@
 import {ImageStyle, StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import Animated from 'react-native-reanimated';
 import colors from '../../helpers/colors';
 import {defaultSafeAreaInsetsBottom, defaultSafeAreaInsetsTop, scaleW, width} from '../../helpers/device';
 
@@ -26,7 +27,8 @@ interface Styles {
   amenityItemsContainer: ViewStyle,
   amenityIconContainer: ViewStyle,
   viewAllContainer: ViewStyle,
-  viewAllButton: ViewStyle
+  viewAllButton: ViewStyle,
+  headerStyle: ViewStyle&Animated.AnimateStyle<any>
 }
 
 const BODY_PADDING = scaleW(20);
@@ -46,8 +48,9 @@ export default StyleSheet.create<Styles>({
   },
   headerContainer: {
     position: 'absolute',
-    top: defaultSafeAreaInsetsTop,
+    top: 0,
     zIndex: 2,
+    width: '100%',
   },
   imageContainer: {
     flex: 1,
@@ -119,16 +122,27 @@ export default StyleSheet.create<Styles>({
   amenityItemText: {
     color: colors.darkGray,
     fontSize: scaleW(15),
-    marginLeft: scaleW(15),
+    marginLeft: scaleW(10),
   },
-  amenityIconContainer: {
-    width: scaleW(24),
-  },
+  amenityIconContainer: {},
   viewAllContainer: {
     flexDirection: 'row',
     marginTop: scaleW(20),
   },
   viewAllButton: {
     paddingHorizontal: scaleW(30),
+  },
+  headerStyle: {
+    width: '100%',
+    paddingBottom: 20,
+    paddingTop: defaultSafeAreaInsetsTop,
+    shadowColor: 'rgba(0, 0, 0, .3)',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 20,
+    elevation: 5,
   },
 });

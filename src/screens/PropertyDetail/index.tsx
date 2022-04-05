@@ -1,6 +1,6 @@
 import {useQuery} from '@apollo/client';
-import React, {useState, useEffect, useCallback, ReactNode} from 'react';
-import {View, ScrollView, ActivityIndicator} from 'react-native';
+import React, {useState, useEffect, useCallback, ReactNode, useRef} from 'react';
+import {View, ActivityIndicator, Animated} from 'react-native';
 import {Text, Icon, Button, CacheImage, Header} from '../../components';
 import styles from './styles';
 import {Home} from '../../helpers/interfaces';
@@ -10,6 +10,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {StackParamsList} from '../../navigators/Explore';
 import colors from '../../helpers/colors';
 import globalStyles from '../../helpers/globalStyles';
+import {scaleW} from '../../helpers/device';
 
 export type PropertyDetailScreenNavigationType = StackNavigationProp<StackParamsList, 'explore.propertyDetail'>;
 
@@ -24,6 +25,8 @@ const PropertyDetail: React.FC<Props> = ({route}) => {
   const [descriptionLengthMore, setDescriptionLengthMore] = useState<boolean>(false);
   const [readMoreTextShown, setReadMoreTextShown] = useState(false);
   const [amenitiesItems, setAmenitiesItems] = useState<ReactNode[]>([]);
+  const scrollY: Animated.Value = useRef(new Animated.Value(0)).current;
+  const scrollRef = useRef();
 
   const toggleNumberOfLines = () => {
     setReadMoreTextShown(!readMoreTextShown);
@@ -70,16 +73,42 @@ const PropertyDetail: React.FC<Props> = ({route}) => {
     }
   }, [data?.home?.description]);
 
+  const headerBackgroundColor = scrollY.interpolate({
+    inputRange: [0, scaleW(100)],
+    outputRange: [colors.transparent, colors.white],
+    extrapolate: 'clamp',
+  });
+
   if (loading) {
     return <ActivityIndicator />;
   }
 
+  const HeaderRightComponent = () => (
+    <Button>
+      <Icon name="share" />
+    </Button>
+  );
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.headerContainer}>
-        <Header transparent navigation={navigation} />
+        <Header
+          iconColor={colors.primary}
+          containerStyle={[styles.headerStyle, {backgroundColor: headerBackgroundColor}]}
+          navigation={navigation}
+          RightComponent={HeaderRightComponent}
+        />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.contentContainer}>
+      <Animated.ScrollView
+        ref={scrollRef}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {y: scrollY}}}],
+          {useNativeDriver: false},
+        )}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.contentContainer}
+      >
         <View style={styles.headContainer}>
           <View style={styles.imageContainer}>
             <CacheImage style={styles.image} uri={data.home.photos[0].url} />
@@ -144,7 +173,7 @@ const PropertyDetail: React.FC<Props> = ({route}) => {
             </Button>
           </View>
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
 
     </View>
   );
