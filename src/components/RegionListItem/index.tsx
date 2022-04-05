@@ -23,9 +23,9 @@ const RegionListItem: React.FC<Props> = ({title, isSelected, setSelected}) => (
     <Text font={isSelected ? 'semiBold' : 'regular'} style={styles.title}>
       {typeof title === 'string' ? title : (
         <>
-          <Text>{title[0]}</Text>
-          <Text font="semiBold">{title[1]}</Text>
-          <Text>{title[2]}</Text>
+          <Text style={styles.title}>{title[0]}</Text>
+          <Text style={styles.title} font="semiBold">{title[1]}</Text>
+          <Text style={styles.title}>{title[2]}</Text>
         </>
       )}
     </Text>
